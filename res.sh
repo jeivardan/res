@@ -82,5 +82,6 @@ function Calculation
 while true
 do
     height=`tput lines`
-    Calculation $height
+    lines=`expr $height - 3`
+    Calculation $lines
 done

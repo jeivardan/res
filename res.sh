@@ -69,13 +69,13 @@ function Calculation
     done
     
     clear
-    printf "\e[30;107m%-6s %-6s %-10s %-4s %-3s %-6s %-4s %-7s %-7s %-18s\e[0m\n" "PID" "PPID" "USER" "PR" "NI" "STATE" "THR" "%MEM" "%CPU" "COMMAND"
+    printf "%-6s %-6s %-10s %-4s %-3s %-6s %-4s %-7s %-7s %-18s\n\n" "PID" "PPID" "USER" "PR" "NI" "STATE" "THR" "%MEM" "%CPU" "COMMAND"
     sort -nr -k9 data | head -$1
 }
 
 while true
 do
-    terminal_height=$(tput lines)
-    lines=$(( $terminal_height - 3 ))
+    terminal_height=`tput lines`
+    lines=`expr $terminal_height - 3`
     Calculation $lines
 done

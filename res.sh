@@ -64,18 +64,23 @@ function Calculation
             
             #Memory usage
             memory_usage=$( awk 'BEGIN {print( (('$resident' + '$data_and_stack' ) * 100) / '$total_mem'  )}' )
+            
+            #Writing into file as formatted
             printf "%-6d %-6d %-10s %-4d %-5d %-4s %-4u %-7.2f %-7.2f %-18s\n" $pid $ppid $user $priority $nice $state $num_threads $memory_usage $cpu_usage $comm >> data
         fi
     done
     
     clear
+    
+    #Displaying the file contents
     printf "%-6s %-6s %-10s %-4s %-3s %-6s %-4s %-7s %-7s %-18s\n\n" "PID" "PPID" "USER" "PR" "NI" "STATE" "THR" "%MEM" "%CPU" "COMMAND"
+    
+    #Sorting based on CPU usage(field 9)
     sort -nr -k9 data | head -$1
 }
 
 while true
 do
-    terminal_height=`tput lines`
-    lines=`expr $terminal_height - 3`
-    Calculation $lines
+    height=`tput lines`
+    Calculation $height
 done

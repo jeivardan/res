@@ -58,7 +58,7 @@ function Calculation
     
             #CPU usage
             total_time=`expr $utime + $stime`
-            total_time=`expr $total_time + $cutime`
+            total_time=`expr $total_time + $cstime`
             seconds=$( awk 'BEGIN {print ( '$uptime' - ('$starttime' / '$clock_ticks') )}' )
             cpu_usage=$( awk 'BEGIN {print ( 100 * (('$total_time' / '$clock_ticks') / '$seconds') )}' )
             
